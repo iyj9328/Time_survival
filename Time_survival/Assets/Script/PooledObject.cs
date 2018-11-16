@@ -14,6 +14,7 @@ public class PooledObject
 
     [SerializeField]
     private List<GameObject> Magazine = new List<GameObject>();     //탄창
+    private Rigidbody rigidbody;
 
     //CreateBullets함수를 이용해 총알의 최대갯수만큼 탄창에 생성
     public void Initialize(Transform parent)
@@ -62,8 +63,10 @@ public class PooledObject
     {
         Vector3 obj_pos = new Vector3(0f, 1.7f, 0f);
         Quaternion obj_rot = Quaternion.identity;
+        rigidbody = obj.GetComponent<Rigidbody>();
 
         obj.transform.position = obj_pos;
         obj.transform.rotation = obj_rot;
+        rigidbody.velocity = Vector3.zero;
     }
 }

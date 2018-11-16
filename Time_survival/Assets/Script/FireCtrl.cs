@@ -60,10 +60,6 @@ public class FireCtrl : MonoBehaviour
         }
         Quaternion FireRot = Quaternion.Euler(fpsCam.transform.rotation.x, 180, fpsCam.transform.rotation.z);
 
-        //bullet.transform.rotation = FireRot;
-        //bullet.transform.rotation = new Quaternion(fpsCam.transform.rotation.x, fpsCam.transform.rotation.y, fpsCam.transform.rotation.z, fpsCam.transform.rotation.w);
-        //bullet.SetActive(true);
-
         AudioSource.PlayClipAtPoint(shootClip, transform.position);
     }
 

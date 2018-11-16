@@ -18,7 +18,7 @@ public class MainMenuControl : MonoBehaviour {
         StartCoroutine(FadeIn());
 	}
 	
-    public IEnumerator FadeIn()
+    public IEnumerator FadeIn()     //유저의 포커싱에 따라 초록색 바(Bar)가 줄어듦.
     {
         float alpha = 1f;
 
@@ -34,24 +34,7 @@ public class MainMenuControl : MonoBehaviour {
             yield return new WaitForEndOfFrame();
         }
     }
-    /*
-    public void getGazing()
-    {
-        check = true;
-        StartCoroutine(NextScene(getScene()));
-    }
-
-    public void lostGazing()
-    {
-        check = false;
-    }
-
-    public string getScene()
-    {
-        return sceneName;
-    }*/
-
-    public IEnumerator NextScene(string scenename)
+    public IEnumerator NextScene(string scenename)      //초록색 바(Bar)가 다 줄어들었을 때 다음 씬을 실행.
     {
         float alpha = 0f;
         

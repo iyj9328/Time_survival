@@ -29,17 +29,17 @@ public class GameManager : MonoBehaviour
     public Text ResultText; // 클리어시 결과를 보여줄 텍스트
     public Image HealthBar; // 체력바
     public Image StatusImage; //상태 표시 이미지
-    public Image ComboBar;
+    public Image ComboBar;    //콤보 게이지
     public Image FadeImage;
-    public Image Map;
-    public AudioClip Warning;
-    public AudioClip Gameover;
-    public AudioClip NormalBgm;
-    public AudioClip BossBgm;
-    public AudioClip MissionComplete;
+    public Image Map;         //미니맵
+    public AudioClip Warning;   //빅웨이브 시에 경고음
+    public AudioClip Gameover;  //게임오버 당했을 때(졌을 때) BGM
+    public AudioClip NormalBgm; //평상 시에 나오는 BGM
+    public AudioClip BossBgm;   //Boss 몹 등장 시에 나오는 BGM
+    public AudioClip MissionComplete;       //게임을 클리어했을 때 나오는 BGM
 
-    private GameObject GetHpIns;
-    private AudioSource modeName;
+    private GameObject GetHpIns;        //HP회복 파티클 GameObject
+    private AudioSource modeName;       
 
     [HideInInspector]
     public bool CanGenerate = true; //적 생성 가능 여부
@@ -61,6 +61,7 @@ public class GameManager : MonoBehaviour
 
     int MaxCombo = 0;
 
+    //Object Pooling 방식으로 총알을 사전에 객체화 시켜서 생성해줌.
     private void Awake()
     {
         for(int i = 0; i < ObjectPool.Count; ++i)
@@ -103,7 +104,7 @@ public class GameManager : MonoBehaviour
             AudioSource.PlayClipAtPoint(Gameover, transform.position);
             StartCoroutine(GameEnd());
         }
-        if (OnGetHpCheck != false)
+        if (OnGetHpCheck != false)      //회복 Item을 명중 시켰을 시에 Effect
         {
             StartCoroutine(OnGetHp());
         }
@@ -139,6 +140,7 @@ public class GameManager : MonoBehaviour
 
     }
 
+    //BGM을 바꿔주기위한 함수
     void AddBgmAudio(AudioClip BgmName)
     {
         transform.gameObject.AddComponent<AudioSource>();
@@ -148,6 +150,7 @@ public class GameManager : MonoBehaviour
         modeName.Play();
     }
 
+    //사용하고 난 GameObject(총알)를 다시 Pool에 반환시켜준다
     public bool PushToPool(string itemName, GameObject bullet, Transform parent = null)
     {
         PooledObject pool = GetPoolItem(itemName);
@@ -157,6 +160,7 @@ public class GameManager : MonoBehaviour
         return true;
     }
 
+    //생성되어있는 객체인 GameObject(총알)를 이름으로 찾아 GetPoolItem 함수를 이용하여 Pool에서 꺼내온다.
     public GameObject PopFromPool(string itemName, Transform parent = null)
     {
         PooledObject pool = GetPoolItem(itemName);
@@ -164,7 +168,6 @@ public class GameManager : MonoBehaviour
         
         return pool.PopFromPool(transform);
     }
-
     PooledObject GetPoolItem(string itemName)
     {
         for(int i = 0; i < ObjectPool.Count; i++)

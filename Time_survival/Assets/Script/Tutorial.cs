@@ -156,7 +156,7 @@ public class Tutorial : MonoBehaviour {
         }
     }
 
-    IEnumerator FadeOut()
+    IEnumerator FadeOut()           //천천히 설명화면이 사라지면서 튜토리얼 모드가 실행 됨.
     {
         float alpha = 1;
         FadeImage.color = new Color(FadeImage.color.r, FadeImage.color.g, FadeImage.color.b, alpha);

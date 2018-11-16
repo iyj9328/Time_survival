@@ -30,9 +30,7 @@ public class Title : MonoBehaviour {
             yield return new WaitForEndOfFrame();
         }
         yield return new WaitForSeconds(0.5f);
-        StartCoroutine(WaitInput());
-
-        
+        StartCoroutine(WaitInput());        //유저의 입력을 기다리며 패드의 입력이 없을 시에 AutoFire모드 전환    
     }
 
     IEnumerator WaitInput()
